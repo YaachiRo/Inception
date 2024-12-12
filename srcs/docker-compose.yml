@@ -46,9 +46,9 @@ services:
   
   wordpress:
     build : requirements/wordpress/
-    container_name : "wordpress"
-    ports :
-    - 9000
+    image : wordpress
+    container_name : wordpress
+    pull_policy: build
     depends_on:
       - mariadb
     networks:
@@ -56,5 +56,5 @@ services:
     env_file:
       - .env
     volumes:
-      - "wordpress-data:/var/www/html"
+      - wordpress-data:/var/www/html
     restart: always

@@ -4,9 +4,9 @@ FROM debian:bullseye
 RUN apt update -y && apt upgrade -y && apt-get install -y php php-cli php-cgi php-fpm php-mysql php-curl php-xml \
     php-mbstring php-gd php-zip php-bz2 unzip wget curl mariadb-client 
 
-COPY /conf/conf.www /etc/php/7.4/fpm/pool.d/
-COPY /tools/script.sh /bin/script.sh
-RUN chmod -x /bin/init.sh
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/
+COPY tools/script.sh /bin/script.sh
+RUN chmod +x /bin/script.sh
 RUN mkdir -p /run/php
 
 
@@ -21,6 +21,6 @@ RUN mv wp-config-sample.php wp-config.php
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ; chmod +x wp-cli.phar ; mv wp-cli.phar /usr/local/bin/wp
 
-ENTRYPOINT ["/bin/init.sh"]
+ENTRYPOINT ["/bin/script.sh"]
 
 CMD ["php-fpm7.4",  "-F"]

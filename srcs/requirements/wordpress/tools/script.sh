@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 5
+
 wp config set DB_NAME $MYSQL_DATABASE --allow-root; 
 wp config set DB_USER $MYSQL_USER --allow-root;
 wp config set DB_PASSWORD $MYSQL_PASSWORD --allow-root;
@@ -12,8 +14,10 @@ wp core install --allow-root \
 --title="Inception" \
 --admin_email="idelfag@student.1337.ma";
 
-wp user create --allow-root $WP_USER "test123@gmail.com" --user_pass=$WP_USER_PASSWORD;
+wp user create --allow-root $WP_USER "test123@gmail.com" --user_pass=$WP_USER_PASSWORD --role="contributor";
 
-wp theme install twentytwentyfive --activate --allow-root
+wp theme install twentytwentyfour --activate --allow-root 
+
+wp plugin update --all --allow-root
 
 exec $@
