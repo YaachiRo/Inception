@@ -2,8 +2,8 @@
 DC=docker compose
 
 up:
-	mkdir -p data/mariadb
-	mkdir -p data/wordpress
+	mkdir -p /home/idelfag/data/mariadb
+	mkdir -p /home/idelfag/data/wordpress
 	$(DC) -f ./srcs/docker-compose.yml up -d
 
 down:
@@ -11,8 +11,8 @@ down:
 
 fclean:
 	$(DC) -f ./srcs/docker-compose.yml down --volumes --rmi all
-	sudo rm -rf ./data/mariadb
-	sudo rm -rf ./data/wordpress
+	sudo rm -rf /home/idelfag/data/mariadb
+	sudo rm -rf /home/idelfag/data/wordpress
 
 re: down up
 
